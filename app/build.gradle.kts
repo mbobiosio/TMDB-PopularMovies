@@ -42,12 +42,6 @@ android {
 
     buildTypes.onEach {
         it.buildConfigField("String", "API_KEY", "${keystoreProperties["apiKey"] as String?}")
-        it.buildConfigField("String", "BASE_URL", "${keystoreProperties["BASE_URL"] as String?}")
-        it.buildConfigField(
-            "String",
-            "YOUTUBE_API",
-            "${keystoreProperties["YOUTUBE_API"] as String?}"
-        )
     }
 
     buildFeatures {
