@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
-@Entity(tableName = "remote_keys")
+@Entity(tableName = "popular_movie_remote_keys")
 data class RemoteKeyEntity(
     @PrimaryKey
-    val movieId: Int,
+    val movieId: Long,
     val prevKey: Int?,
     val nextKey: Int?
 )

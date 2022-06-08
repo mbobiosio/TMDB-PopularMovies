@@ -1,8 +1,5 @@
 package com.mbobiosio.popularmovies.di
 
-import androidx.paging.ExperimentalPagingApi
-import com.mbobiosio.popularmovies.data.local.AppDatabase
-import com.mbobiosio.popularmovies.data.remote.api.ApiService
 import com.mbobiosio.popularmovies.data.remote.repository.MovieRepositoryImpl
 import com.mbobiosio.popularmovies.domain.repository.MovieRepository
 import com.mbobiosio.popularmovies.domain.usecase.PopularMoviesUseCase
@@ -18,15 +15,12 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-@ExperimentalPagingApi
 class AppModule {
 
     @Provides
-    @Singleton
     fun provideMovieRepository(
-        service: ApiService,
-        database: AppDatabase
-    ): MovieRepository = MovieRepositoryImpl(service, database)
+        movieRepositoryImpl: MovieRepositoryImpl
+    ): MovieRepository = movieRepositoryImpl
 
     @Provides
     @Singleton

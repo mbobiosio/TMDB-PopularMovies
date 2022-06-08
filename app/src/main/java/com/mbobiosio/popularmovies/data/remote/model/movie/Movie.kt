@@ -13,10 +13,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Movie(
 
-    val remoteId: Int = 0,
-
     @Json(name = "poster_path")
-    val posterPath: String?,
+    val posterPath: String,
 
     @Json(name = "adult")
     val adult: Boolean,
@@ -31,7 +29,7 @@ data class Movie(
     val genreIds: List<Int>,
 
     @Json(name = "id")
-    val id: Int,
+    val id: Long,
 
     @Json(name = "original_title")
     val originalTitle: String,

@@ -1,46 +1,31 @@
 package com.mbobiosio.popularmovies.data.mappers
 
-import com.mbobiosio.popularmovies.data.local.entity.MovieEntity
-import com.mbobiosio.popularmovies.data.remote.model.movie.Movie
+import com.mbobiosio.popularmovies.data.local.entity.PopularMovie
+import com.mbobiosio.popularmovies.data.remote.model.MovieResponse
+import com.mbobiosio.popularmovies.domain.model.Movies
 
 /**
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
-fun movieToEntity(movie: Movie): MovieEntity {
-    return MovieEntity(
-        id = movie.id,
-        title = movie.title,
-        originalTitle = movie.originalTitle,
-        overview = movie.overview,
-        posterPath = movie.posterPath,
-        backdropPath = movie.backdropPath,
-        releaseDate = movie.releaseDate,
-        genreIds = movie.genreIds,
-        originalLanguage = movie.originalLanguage,
-        popularity = movie.popularity,
-        voteCount = movie.voteCount,
-        hasVideo = movie.hasVideo,
-        voteAverage = movie.voteAverage,
-        isAdult = movie.adult
-    )
-}
 
-fun entityToModel(movie: MovieEntity): Movie {
-    return Movie(
-        id = movie.id,
-        title = movie.title,
-        originalTitle = movie.originalTitle,
-        overview = movie.overview,
-        posterPath = movie.posterPath,
-        backdropPath = movie.backdropPath,
-        releaseDate = movie.releaseDate,
-        genreIds = movie.genreIds,
-        originalLanguage = movie.originalLanguage,
-        popularity = movie.popularity,
-        voteCount = movie.voteCount,
-        hasVideo = movie.hasVideo,
-        voteAverage = movie.voteAverage,
-        adult = movie.isAdult
-    )
-}
+fun MovieResponse.mapDataToPopularMovies(): Movies<PopularMovie> =
+    with(this) {
+        Movies(
+            total = totalResults,
+            page = page,
+            movies = results.map {
+                PopularMovie(
+                    it.id,
+                    it.title,
+                    it.overview,
+                    it.posterPath,
+                    it.backdropPath,
+                    it.releaseDate,
+                    it.originalLanguage,
+                    it.voteCount,
+                    it.voteAverage
+                )
+            }
+        )
+    }

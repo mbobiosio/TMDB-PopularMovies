@@ -23,6 +23,6 @@
 
         <argument
             android:name="movie"
-            app:argType="com.mbobiosio.popularmovies.data.remote.model.movie.Movie" />
+            app:argType="com.mbobiosio.popularmovies.data.local.entity.PopularMovie" />
     </fragment>
 </navigation>

@@ -1,28 +1,25 @@
 package com.mbobiosio.popularmovies.data.local.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 /**
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
-@Entity(tableName = "movies")
-data class MovieEntity(
+@Entity(tableName = "popular_movie")
+@Parcelize
+data class PopularMovie(
+    val movieId: Long,
     @PrimaryKey
-    val id: Int,
-    val remoteId: Int = 0,
     val title: String,
-    val originalTitle: String,
     val overview: String,
-    val posterPath: String?,
-    val backdropPath: String?,
+    val poster: String,
+    val backdrop: String?,
     val releaseDate: String?,
-    val genreIds: List<Int>,
     val originalLanguage: String,
-    val popularity: Double,
     val voteCount: Int,
-    val hasVideo: Boolean,
-    val voteAverage: Double,
-    val isAdult: Boolean,
-)
+    val voteAverage: Double
+) : Parcelable

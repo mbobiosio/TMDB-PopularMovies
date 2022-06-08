@@ -7,7 +7,7 @@
 
         <variable
             name="movie"
-            type="com.mbobiosio.popularmovies.data.remote.model.movie.Movie" />
+            type="com.mbobiosio.popularmovies.data.local.entity.PopularMovie" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
-                    backdropImage="@{movie.backdropPath}"/>
+                    backdropImage="@{movie.backdrop}"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

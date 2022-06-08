@@ -1,7 +1,7 @@
 package com.mbobiosio.popularmovies.domain.repository
 
 import androidx.paging.PagingData
-import com.mbobiosio.popularmovies.data.remote.model.movie.Movie
+import com.mbobiosio.popularmovies.data.local.entity.PopularMovie
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
  * https://linktr.ee/mbobiosio
  */
 interface MovieRepository {
-    fun getPopularMovies(): Flow<PagingData<Movie>>
+    fun getPopularMovies(): Flow<PagingData<PopularMovie>>
 }

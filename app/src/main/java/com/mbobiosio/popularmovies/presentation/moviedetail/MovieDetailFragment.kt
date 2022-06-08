@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.mbobiosio.popularmovies.data.remote.model.movie.Movie
+import com.mbobiosio.popularmovies.data.local.entity.PopularMovie
 import com.mbobiosio.popularmovies.databinding.FragmentMovieDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class MovieDetailFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailBinding
 
     private val args: MovieDetailFragmentArgs by navArgs()
-    private lateinit var movieModel: Movie
+    private lateinit var movieModel: PopularMovie
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,8 +44,6 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun bindMovieDetails() = with(binding) {
-        binding.apply {
-            movie = movieModel
-        }
+        movie = movieModel
     }
 }

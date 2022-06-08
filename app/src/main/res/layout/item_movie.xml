@@ -7,7 +7,7 @@
 
         <variable
             name="movie"
-            type="com.mbobiosio.popularmovies.data.remote.model.movie.Movie" />
+            type="com.mbobiosio.popularmovies.data.local.entity.PopularMovie" />
 
         <variable
             name="clickListener"
@@ -28,7 +28,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/shapeableImageView"
-                moviePoster="@{movie.posterPath}"
+                moviePoster="@{movie.poster}"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_170sdp"
                 android:contentDescription="@string/movie"

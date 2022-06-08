@@ -3,7 +3,7 @@ package com.mbobiosio.popularmovies.di
 import android.content.Context
 import androidx.room.Room
 import com.mbobiosio.popularmovies.data.local.AppDatabase
-import com.mbobiosio.popularmovies.data.local.dao.MoviesDao
+import com.mbobiosio.popularmovies.data.local.dao.PopularMovieDao
 import com.mbobiosio.popularmovies.data.local.dao.RemoteKeyDao
 import dagger.Module
 import dagger.Provides
@@ -33,8 +33,8 @@ class DatabaseModule {
             .build()
 
     @Provides
-    fun provideMoviesDao(appDatabase: AppDatabase): MoviesDao = appDatabase.moviesDao
+    fun provideMoviesDao(appDatabase: AppDatabase): PopularMovieDao = appDatabase.popularMovieDao
 
     @Provides
-    fun provideRemoteKeyDao(appDatabase: AppDatabase): RemoteKeyDao = appDatabase.remoteKeyDao
+    fun provideRemoteKeyDao(appDatabase: AppDatabase): RemoteKeyDao = appDatabase.popularMovieRemoteDao
 }

@@ -1,47 +1,41 @@
 package com.mbobiosio.popularmovies.data.remote.repository
 
-import androidx.paging.* // ktlint-disable no-wildcard-imports
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.mbobiosio.popularmovies.data.local.AppDatabase
-import com.mbobiosio.popularmovies.data.mappers.entityToModel
-import com.mbobiosio.popularmovies.data.remote.api.ApiService
-import com.mbobiosio.popularmovies.data.remote.model.movie.Movie
+import com.mbobiosio.popularmovies.data.local.entity.PopularMovie
 import com.mbobiosio.popularmovies.data.remote.paging.PopularMoviesMediator
 import com.mbobiosio.popularmovies.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
-@ExperimentalPagingApi
-class MovieRepositoryImpl(
-    private val service: ApiService,
-    private val database: AppDatabase
+@Singleton
+class MovieRepositoryImpl @Inject constructor(
+    private val database: AppDatabase,
+    private val popularMoviesMediator: PopularMoviesMediator
 ) : MovieRepository {
 
-    override fun getPopularMovies(): Flow<PagingData<Movie>> {
-        Timber.d("Called")
-        val pagingSourceFactory = { database.moviesDao.getMovies() }
+    @OptIn(ExperimentalPagingApi::class)
+    override fun getPopularMovies(): Flow<PagingData<PopularMovie>> {
+
+        val pagingSourceFactory = { database.popularMovieDao.getMovies() }
 
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
-                prefetchDistance = 2,
-                maxSize = PagingConfig.MAX_SIZE_UNBOUNDED,
-                jumpThreshold = Int.MIN_VALUE,
                 enablePlaceholders = true,
+                prefetchDistance = 5,
+                initialLoadSize = 40
             ),
-            remoteMediator = PopularMoviesMediator(
-                service,
-                database
-            ),
+            remoteMediator = popularMoviesMediator,
             pagingSourceFactory = pagingSourceFactory
-        ).flow.map { data ->
-            data.map { entity ->
-                entityToModel(entity)
-            }
-        }
+        ).flow
     }
 }

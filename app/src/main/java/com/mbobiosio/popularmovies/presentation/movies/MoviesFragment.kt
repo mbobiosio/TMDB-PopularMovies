@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.mbobiosio.popularmovies.data.remote.model.movie.Movie
+import com.mbobiosio.popularmovies.data.local.entity.PopularMovie
 import com.mbobiosio.popularmovies.databinding.FragmentMoviesBinding
 import com.mbobiosio.popularmovies.util.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +51,7 @@ class MoviesFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.movieList.observe(viewLifecycleOwner) {
+        viewModel.getPopularMovies().observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 moviesAdapter.submitData(it)
             }
@@ -66,10 +66,12 @@ class MoviesFragment : Fragment() {
         }
 
         moviesAdapter.itemClickListener = object : ItemClickListener {
-            override fun onItemClick(movie: Movie?) {
+            override fun onItemClick(movie: PopularMovie?) {
                 movie?.let {
                     findNavController().safeNavigate(
-                        MoviesFragmentDirections.actionMoviesToDetails(it)
+                        MoviesFragmentDirections.actionMoviesToDetails(
+                            it
+                        )
                     )
                 }
             }

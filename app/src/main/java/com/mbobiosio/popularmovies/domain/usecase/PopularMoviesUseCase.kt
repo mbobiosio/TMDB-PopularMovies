@@ -1,7 +1,7 @@
 package com.mbobiosio.popularmovies.domain.usecase
 
 import androidx.paging.PagingData
-import com.mbobiosio.popularmovies.data.remote.model.movie.Movie
+import com.mbobiosio.popularmovies.data.local.entity.PopularMovie
 import com.mbobiosio.popularmovies.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -12,6 +12,6 @@ import kotlinx.coroutines.flow.Flow
 class PopularMoviesUseCase(
     private val movieRepository: MovieRepository
 ) {
-    operator fun invoke(): Flow<PagingData<Movie>> =
+    operator fun invoke(): Flow<PagingData<PopularMovie>> =
         movieRepository.getPopularMovies()
 }
