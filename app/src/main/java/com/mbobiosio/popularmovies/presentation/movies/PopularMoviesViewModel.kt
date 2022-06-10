@@ -16,7 +16,7 @@ import javax.inject.Inject
  * https://linktr.ee/mbobiosio
  */
 @HiltViewModel
-class MoviesViewModel @Inject constructor(
+class PopularMoviesViewModel @Inject constructor(
     private val moviesUseCase: PopularMoviesUseCase
 ) : ViewModel() {
 

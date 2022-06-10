@@ -23,11 +23,11 @@ import kotlinx.coroutines.launch
  * https://linktr.ee/mbobiosio
  */
 @AndroidEntryPoint
-class MoviesFragment : Fragment() {
+class PopularMoviesFragment : Fragment() {
 
     private lateinit var binding: FragmentMoviesBinding
 
-    private val viewModel by viewModels<MoviesViewModel>()
+    private val viewModel by viewModels<PopularMoviesViewModel>()
 
     private val moviesAdapter by lazy {
         MoviesAdapter()
@@ -52,9 +52,7 @@ class MoviesFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.getPopularMovies().observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                moviesAdapter.submitData(it)
-            }
+            moviesAdapter.submitData(lifecycle, it)
         }
     }
 
@@ -69,7 +67,7 @@ class MoviesFragment : Fragment() {
             override fun onItemClick(movie: PopularMovie?) {
                 movie?.let {
                     findNavController().safeNavigate(
-                        MoviesFragmentDirections.actionMoviesToDetails(
+                        PopularMoviesFragmentDirections.actionMoviesToDetails(
                             it
                         )
                     )
