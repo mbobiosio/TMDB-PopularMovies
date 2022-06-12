@@ -14,11 +14,6 @@ The purpose of this project is to:
   may end up increasing the learning curve of your code to a point where it would be better to use a
   simpler architecture like MVVM.
 
-## Challenges
-
-- I have confirmed that the tmdb api does not indeed support pagination as provided by
-  RemoteMediator. The direct implementation of this causes constant loop between page one and two. My approach to solve this loop is to use a different id as the remote key reference. The limitation however is that only page one is fetched always and scrolling doesn't increment pages at this time. A different approach would be without RemoteMediator however, the essence of this project was to work with the recommended tool for the usecase. 
-
 ## Technical Summary
 
 - [Dependency Injection - Dagger-Hilt](https://dagger.dev/hilt/): Hilt is a dependency injection
